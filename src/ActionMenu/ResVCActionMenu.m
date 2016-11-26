@@ -16,6 +16,7 @@
 #import "FavSelectFragment.h"
 #import "NGListVC.h"
 #import "MySplitVC.h"
+#import "ThItemActionMenu.h"
 
 @interface ResVCActionMenu ()
 
@@ -28,6 +29,8 @@
 
 //他ツール
 @property (nonatomic) ActionButtonInfo *createNextThreadButtonInfo;
+@property (nonatomic) ActionButtonInfo *openInSafariInfo;
+@property (nonatomic) ActionButtonInfo *docopyThreadInfo;
 @property (nonatomic) ActionButtonInfo *ngManageButtonInfo; // NG管理
 @property (nonatomic) ActionButtonInfo *fontConfButtonInfo;
 
@@ -52,26 +55,30 @@
 {
     if (self.forTool) {
         if (self.fontConfButtonInfo == nil) {
-
+            
+            self.treeToggleButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"ツリー切替" withImageName:@"tree_30.png"];
             self.fontConfButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"文字サイズ" withImageName:@"zoom_in_30.png"];
             ;
 
             self.createNextThreadButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"次スレ作成" withImageName:@"file_30.png"];
+            self.docopyThreadInfo = [[ActionButtonInfo alloc] initWithTitle:@"コピー" withImageName:@"copy_30.png"];
             self.ngManageButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"NG管理" withImageName:@"ng_shield_30.png"];
         }
 
-        return @[ self.fontConfButtonInfo, self.createNextThreadButtonInfo ];
+        return @[ self.fontConfButtonInfo, self.createNextThreadButtonInfo ,self.docopyThreadInfo, self.treeToggleButtonInfo, self.ngManageButtonInfo];
 
     } else {
         if (self.moveBoardButtonInfo == nil) {
-            self.treeToggleButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"ツリー切替" withImageName:@"tree_30.png"];
+            
+            self.openInSafariInfo = [[ActionButtonInfo alloc] initWithTitle:@"Safariで開く" withImageName:@"next_thread_30.png"];
             self.moveBoardButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"板へ" withImageName:@"home2_30.png"];
             self.nextSearchButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"次スレ検索" withImageName:@"flash_light.png"];
             self.toolButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"他ツール" withImageName:nil];
         }
-        return @[ self.nextSearchButtonInfo, self.moveBoardButtonInfo, self.toolButtonInfo, self.treeToggleButtonInfo ];
+        return @[ self.nextSearchButtonInfo, self.moveBoardButtonInfo, self.toolButtonInfo,self.openInSafariInfo];
     }
 }
+
 
 // @overide
 - (void)onLayoutCompleted
@@ -218,7 +225,23 @@
                                              Board *board = [[BoardManager sharedManager] boardForTh:self.resVC.th];
                                              [thlistTransaction startOpenThListTransaction:board];
                                            }];
-    }
+    } else if  (info.button == self.self.openInSafariInfo.button){
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[self.resVC.th threadUrl]]];
+    
+    } /*else if (info.button == self.self.docopyThreadInfo.button){
+        [[MySplitVC instance] closeActionMenu:nil
+                                     complete:^{
+                                         ThItemActionMenu *thItemActionMenu = [[ThItemActionMenu alloc] init];
+                                         
+                                         thItemActionMenu.thListBaseVC = self.;
+                                         thItemActionMenu.isVerticalMode = YES;
+                                         thItemActionMenu.thVm = self.thVm;
+                                         thItemActionMenu.forCopy = YES;
+                                         [thItemActionMenu build];
+                                         [[MySplitVC instance] openActionMenu:thItemActionMenu];
+                                     }];
+
+    }*/
 }
 
 - (IBAction)listControllerEditingDidBegin:(id)sender

@@ -276,10 +276,23 @@
 
 - (NSString *)changeNextTitle:(NSString *)title
 {
+    
+    [title stringByReplacingOccurrencesOfString: @"[無断転載禁止]©2ch.net" withString:@""];
     BOOL isInNumber = NO;
     NSInteger start = 0;
     NSInteger end;
-
+    if ([title hasSuffix:@"[無断転載禁止]©2ch.net"]) {
+        title = [title stringByReplacingOccurrencesOfString: @"[無断転載禁止]©2ch.net" withString:@""];
+    } else if ([title hasSuffix:@"[転載禁止]©2ch.net"]) {
+        title= [title stringByReplacingOccurrencesOfString: @"[転載禁止]©2ch.net" withString:@""];
+    } else if ([title hasSuffix:@"[転載禁止]©bbspink.com"]) {
+       title=  [title stringByReplacingOccurrencesOfString: @"[転載禁止]©bbspink.com" withString:@""];
+    } else if ([title hasSuffix:@"[無断転載禁止]©bbspink.com"]) {
+        title= [title stringByReplacingOccurrencesOfString: @"[無断転載禁止]©bbspink.com" withString:@""];
+    } else if ([title hasSuffix:@"©bbspink.com"]) {
+        title = [title stringByReplacingOccurrencesOfString: @"©bbspink.com" withString:@""];
+    }
+    
     NSInteger count = [title length];
     for (NSInteger i = count - 1; i >= 0; i--) {
         NSString *substr = [title substringWithRange:NSMakeRange(i, 1)];

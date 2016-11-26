@@ -24,7 +24,7 @@
 @property (nonatomic) ActionButtonInfo *fontConfButtonInfo;
 @property (nonatomic) ActionButtonInfo *ngListButtonInfo;
 @property (nonatomic) ActionButtonInfo *syncButtonInfo;
-
+@property (nonatomic) ActionButtonInfo *openFromClipBoardInfo;
 @property UISegmentedControl *themeSegmentedControl;
 
 @end
@@ -56,9 +56,10 @@
         self.ngListButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"NG管理"
                                                           withImageName:@"ng_shield_30.png"];
         self.syncButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"Sync2ch" withImageName:@"sync_30.png"];
+        self.openFromClipBoardInfo = [[ActionButtonInfo alloc]initWithTitle:@"クリップボードを開く" withImageName:@"copy_30.png"];
     }
 
-    NSMutableArray *buttons = [NSMutableArray arrayWithArray:@[ self.confButtonInfo, self.searchButtonInfo, self.ngListButtonInfo ]];
+    NSMutableArray *buttons = [NSMutableArray arrayWithArray:@[ self.openFromClipBoardInfo,self.confButtonInfo, self.searchButtonInfo, self.ngListButtonInfo ]];
 
     if (self.isBoardContext == NO) {
         [buttons addObject:self.fontConfButtonInfo];
@@ -191,6 +192,18 @@
           SyncTransaction *syncTransaction = [[SyncTransaction alloc] init];
           [syncTransaction startTransaction];
         });
+    } else if (info.button == self.openFromClipBoardInfo.button) {
+        NSString *geturl;
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        geturl=pasteboard.string;//[pasteboard valueForPasteboardType:@"public.text"];
+        Th *th =[Th thFromUrl:geturl];
+        if (th) {
+            th = [[ThManager sharedManager] registerTh:th];
+            ResTransaction *man = [[ResTransaction alloc] init];
+            man.th = th;
+            if ([man startOpenThTransaction]) {
+            }
+        }
     }
 }
 

@@ -13,7 +13,7 @@
     //options:(NSAnchoredSearch | NSCaseInsensitiveSearch | NSBackwardsSearch)
     if (_isImageChecked == NO) {
         NSArray* extList = @[@".jpeg", @".jpg", @".jpeg", @".JPEG",@".JPG",
-                             @".png", @".PNG",  @".bmp", @".BMP"];
+                             @".png", @".PNG",  @".bmp", @".BMP", @".gif" , @".GIF"];
 
         for(NSString* str in extList) {
             NSRange searchResult = [_realUrl rangeOfString:str ];
@@ -27,9 +27,9 @@
             if ([_realUrl hasSuffix:@".html"] || [_realUrl hasSuffix:@".htm"]) {
                 _isImageLink = NO;
             }
-            if ([_realUrl hasPrefix:@"sssp://"]) {
+            /*if ([_realUrl hasPrefix:@"sssp://"]) {
                 _isImageLink = NO;
-            }
+            }*/
         }
         _isImageChecked = YES;
     }

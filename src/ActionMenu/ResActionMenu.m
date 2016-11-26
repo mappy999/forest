@@ -198,6 +198,7 @@
             NGItem *ngItem = [NGItem ngIdItem];
             ngItem.value = self.forIDInText ? self.idText : self.res.ID;
             ngItem.board = [[BoardManager sharedManager] boardForTh:self.resVC.th];
+            ngItem.transparent = TRUE;
             [[NGManager sharedManager] addNGItem:ngItem];
             [[MySplitVC instance] closeActionMenu:nil
                                                complete:^{
@@ -223,7 +224,7 @@
                                                  NSString *url = [NSString stringWithFormat:@"http://hissi.org/read.php/%@/%@/%@.html", th.boardKey, tempStr,
                                                                                             [[self encBase64:res.ID] stringByReplacingOccurrencesOfString:@"="
                                                                                                                                                withString:@""]];
-
+/*
                                                  SearchWebViewController *searchWebViewController = [[SearchWebViewController alloc] init];
                                                  searchWebViewController.searchUrl = url; //self.searchTextView.text;
                                                    if ([MySplitVC instance].isTabletMode) {
@@ -231,7 +232,8 @@
                                                        [[MainVC instance] showThListVC:searchWebViewController];
                                                    } else {
                                                        [[MyNavigationVC instance] pushMyViewController:searchWebViewController];
-                                                   }
+                                                   }*/
+                                                   [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 
                                                }];
         }

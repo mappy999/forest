@@ -427,7 +427,7 @@
 }
 - (NSString *)substringOfCharacters:(unichar *)chars start:(int)start end:(int)end
 {
-    return [NSString stringWithCharacters:chars + start length:end - start];
+    return [NSString stringWithCharacters:chars + start length:abs(end - start)];
 }
 
 //

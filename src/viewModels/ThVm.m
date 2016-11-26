@@ -368,9 +368,10 @@
     }
 
     NSString *targetSuffix = nil;
-
-    if ([rawTitle hasSuffix:@"[無断転載禁止]©2ch.net"]) {
-        targetSuffix = @"[無断転載禁止]©2ch.net";
+    NSRange serachResult = [rawTitle rangeOfString:@"[無断転載禁止]©2ch.net"];
+    
+    if (serachResult.location != NSNotFound) {
+        targetSuffix = [rawTitle substringWithRange:NSMakeRange(serachResult.location,[rawTitle length]-serachResult.location)];
     } else if ([rawTitle hasSuffix:@"[転載禁止]©2ch.net"]) {
         targetSuffix = @"[転載禁止]©2ch.net";
     } else if ([rawTitle hasSuffix:@"©2ch.net"]) {

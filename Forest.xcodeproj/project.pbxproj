@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4E38632E0CE645039CF4A395 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D018F0F83D4FB6BD6DC807 /* libPods.a */; };
-		AA010C5B1CA00620002489DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA010C5A1CA00620002489DC /* WebKit.framework */; };
 		AA05CA5C18E7F6950063557B /* FavVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA05CA5A18E7F6950063557B /* FavVC.m */; };
 		AA05CA5D18E7F6950063557B /* FavVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA05CA5B18E7F6950063557B /* FavVC.xib */; };
 		AA081D4B18C700BD00D27802 /* Th.m in Sources */ = {isa = PBXBuildFile; fileRef = AA081D4218C700BD00D27802 /* Th.m */; };
@@ -268,11 +267,25 @@
 		CEE620C01BD3503F006CF933 /* ResVC+Touch.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE620BF1BD3503F006CF933 /* ResVC+Touch.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		92178D971DE1F05500A2622B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0E1303801C9C597708741B34 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7265531D6709649999752391 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		92178DC11DE2B94900A2622B /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
+		92178DC51DE2B94900A2622B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D018F0F83D4FB6BD6DC807 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA010C5A1CA00620002489DC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		AA05CA5918E7F6950063557B /* FavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavVC.h; sourceTree = "<group>"; };
 		AA05CA5A18E7F6950063557B /* FavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FavVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AA05CA5B18E7F6950063557B /* FavVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FavVC.xib; sourceTree = "<group>"; };
@@ -676,7 +689,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA010C5B1CA00620002489DC /* WebKit.framework in Frameworks */,
 				CCF532AE1A444828007EC191 /* MediaPlayer.framework in Frameworks */,
 				CC9A22B61A4241F50059194A /* AssetsLibrary.framework in Frameworks */,
 				CC7812421A30EF69003019B4 /* libsqlite3.0.dylib in Frameworks */,
@@ -695,6 +707,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		92178DC01DE2B94900A2622B /* ForestExtension */ = {
+			isa = PBXGroup;
+			children = (
+				92178DC11DE2B94900A2622B /* ActionRequestHandler.swift */,
+				92178DC51DE2B94900A2622B /* Info.plist */,
+			);
+			path = ForestExtension;
+			sourceTree = "<group>";
+		};
 		AA025080190C7143008A7B65 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,6 +882,7 @@
 				AA0E5C7418ECCA5F00549575 /* resources */,
 				AA51887118B51F0300AABC2B /* src */,
 				AA51889618B51F0300AABC2B /* ForestTests */,
+				92178DC01DE2B94900A2622B /* ForestExtension */,
 				AA51886A18B51F0300AABC2B /* Frameworks */,
 				AA51886918B51F0300AABC2B /* Products */,
 				FBA194F08DFB14B6C67726A4 /* Pods */,
@@ -878,7 +900,6 @@
 		AA51886A18B51F0300AABC2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AA010C5A1CA00620002489DC /* WebKit.framework */,
 				CCF532AD1A444828007EC191 /* MediaPlayer.framework */,
 				CC9A22B51A4241F50059194A /* AssetsLibrary.framework */,
 				CC7812411A30EF69003019B4 /* libsqlite3.0.dylib */,
@@ -1429,6 +1450,7 @@
 				AA51886618B51F0300AABC2B /* Resources */,
 				27E0CC94E9B644E088215273 /* Copy Pods Resources */,
 				6C02D4AC25E9F34C47D2D4A9 /* Embed Pods Frameworks */,
+				92178D971DE1F05500A2622B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -1445,12 +1467,12 @@
 		AA51886018B51F0300AABC2B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0700;
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					AA51886718B51F0300AABC2B = {
-						DevelopmentTeam = EKSAXTLU36;
+						DevelopmentTeam = 46R73D535R;
 					};
 				};
 			};
@@ -1901,21 +1923,23 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7265531D6709649999752391 /* Pods.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 46R73D535R;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "src/Forest-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/src/Forest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.webcrow.repo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ittanmoment.Forest;
 				PRODUCT_NAME = Forest;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1928,21 +1952,23 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0E1303801C9C597708741B34 /* Pods.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 46R73D535R;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "src/Forest-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/src/Forest-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SDKROOT)/usr/lib/system",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.webcrow.repo.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ittanmoment.Forest;
 				PRODUCT_NAME = Forest;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

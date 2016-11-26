@@ -62,9 +62,9 @@
         if (first) {
             if ([node isKindOfClass:[LinkNode class]]) {
                 LinkNode *linkNode = (LinkNode *)node;
-                if ([[linkNode getText] hasPrefix:@"sssp://"]) {
+                /*if ([[linkNode getText] hasPrefix:@"sssp://"]) {
                     continue;
-                }
+                }*/
             }
             first = NO;
         }

@@ -2,6 +2,7 @@
 
 # - インストール - #
 
+
 ### Mac側
 
 - App StoreでXcode7を検索してインストール
@@ -17,7 +18,6 @@
 <br/>
 <br/>
 # - 開発 - #
-[更新履歴](https://github.com/f-tools/forest/blob/master/ChangeLog.md)
 
 ### gitからビルド ###
 ```bash

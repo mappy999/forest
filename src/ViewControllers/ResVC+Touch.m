@@ -84,12 +84,12 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
 
     shadow.userInteractionEnabled = YES;
     // Shadowをつけると複数のポップアップを出したときに重くなる
-    //    shadow.layer.shadowColor = color.CGColor;
-    //    shadow.layer.shadowOffset = shadowOffset;
-    //    shadow.layer.shadowRadius = shadowRadius;
-    //    shadow.layer.masksToBounds = NO;
+  //      shadow.layer.shadowColor = color.CGColor;
+    //   shadow.layer.shadowOffset = shadowOffset;
+   //    shadow.layer.shadowRadius = shadowRadius;
+   //    shadow.layer.masksToBounds = NO;
     shadow.clipsToBounds = NO;
-    // shadow.layer.shadowOpacity = shadowOpacity;
+   //  shadow.layer.shadowOpacity = shadowOpacity;
 
     [shadow addSubview:view];
     return shadow;
@@ -97,7 +97,7 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
 
 - (void)setShadowEnabled:(BOOL)enabled
 {
-    //self.view.layer.shadowOpacity = enabled ? 1: 0;
+  //self.view.layer.shadowOpacity = enabled ? 1: 0;
 }
 
 - (NSUInteger)extraHeight
@@ -618,8 +618,9 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
 
             } else {
                 [[ThManager sharedManager] saveThAsync:self.th];
-                BaseModalNavigationVC *nav = (BaseModalNavigationVC *)self.navigationController;
-                [nav openUrlInDefaultWay:[linkNode getUrl]];
+                /*BaseModalNavigationVC *nav = (BaseModalNavigationVC *)self.navigationController;
+                [nav openUrlInDefaultWay:[linkNode getUrl]];*/
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[linkNode getUrl]]];
             }
         } else if ([node isKindOfClass:[IDNode class]]) {
             //ID抽出でポップアップ
@@ -687,6 +688,17 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
 
                     [actionMenu build];
                     [actionMenu open];
+               /* } else if ([node isKindOfClass:[IDNode class]]) {
+                    IDNode *idNode = (IDNode *)node;
+                    ResActionMenu *actionMenu = [[ResActionMenu alloc] init];
+                    actionMenu.forID = YES;
+                    Res *callingres;
+                    callingres.ID= [idNode idText];
+                    actionMenu.res = callingres;
+                    actionMenu.resVC = self;
+                    [actionMenu build];
+                    [actionMenu open];
+                */
                 }
             } else {
                 ResActionMenu *actionMenu = [[ResActionMenu alloc] init];
@@ -703,6 +715,7 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
 
     }
 }
+
 
 - (void)handleTouchEndedEvent:(UITouch *)touch
 {

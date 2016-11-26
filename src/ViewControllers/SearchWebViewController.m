@@ -3,8 +3,6 @@
 //  Forest
 //
 
-
-
 #import "SearchWebViewController.h"
 #import "ResTransaction.h"
 #import "Th.h"
@@ -20,7 +18,7 @@
 @interface SearchWebViewController ()
 
 //@property (nonatomic) BOOL shouldDismiss;
-@property (nonatomic) WKWebView *webView;
+@property (nonatomic) UIWebView *webView;
 
 @end
 
@@ -28,13 +26,10 @@
 
 - (IBAction)backAction:(id)sender
 {
-    
-    if ([self.navigationController.viewControllers count] > 1) {
-        [self.navigationController popViewControllerAnimated:YES];
-
-//      [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    if ([self.navigationController.viewControllers count] == 1) {
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     } else {
-        [super dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -102,9 +97,9 @@
     self.toolbar.backgroundColor = tabBackgroundColor;
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    // WKWebViewのインスタンス化
+    // UIWebViewのインスタンス化
     CGRect rect = self.view.frame;
-    WKWebView  *webView = [[WKWebView alloc] initWithFrame:rect];
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:rect];
     [self.webViewContainer addSubview:webView];
 
     webView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -144,12 +139,8 @@
                                       constant:0],
     ]];
 
-    //webView.scalesPageToFit = YES;
-    //webView.delegate = self;
-    webView.navigationDelegate = self;
-	webView.allowsBackForwardNavigationGestures = YES;
-
-
+    webView.scalesPageToFit = YES;
+    webView.delegate = self;
     NSURL *url = [NSURL URLWithString:self.searchUrl];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [webView loadRequest:request];
@@ -164,34 +155,31 @@
     }
 }
 
--(void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion {
-    if (self.presentedViewController){
-        [super dismissViewControllerAnimated:flag completion:completion];
-    }
-}
-
-- (void)webView:(WKWebView *)webView
- decidePolicyForNavigationAction:(nonnull WKNavigationAction *)navigationAction decisionHandler:(nonnull void (^)(WKNavigationActionPolicy))decisionHandler
+/* Webページのロード（表示）の開始前 */
+- (BOOL)webView:(UIWebView *)webView
+    shouldStartLoadWithRequest:(NSURLRequest *)request
+                navigationType:(UIWebViewNavigationType)navigationType
 {
-	//NSURLの取得
-	NSURL *url = [webView URL];
-	myLog(@"URL = %@", url);
+    // リンクがクリックされたとき
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ||
+        navigationType == UIWebViewNavigationTypeOther) {
 
-	Th *th = [Th thFromUrl:[url absoluteString]];
+        myLog(@"URL = %@", [request URL]);
 
-	if (th) {
-		th = [[ThManager sharedManager] registerTh:th];
-		ResTransaction *man = [[ResTransaction alloc] init];
-		man.th = th;
-		if ([man startOpenThTransaction]) {
-		}
+        Th *th = [Th thFromUrl:[[request URL] absoluteString]];
 
-		//キャンセル
-		decisionHandler(WKNavigationActionPolicyCancel);
-		return;
-	}
+        if (th) {
+            th = [[ThManager sharedManager] registerTh:th];
+            ResTransaction *man = [[ResTransaction alloc] init];
+            man.th = th;
+            if ([man startOpenThTransaction]) {
+            }
 
-	decisionHandler(WKNavigationActionPolicyAllow);
+            return NO;
+        }
+    }
+
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning
