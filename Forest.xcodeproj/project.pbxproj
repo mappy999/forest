@@ -283,8 +283,6 @@
 /* Begin PBXFileReference section */
 		0E1303801C9C597708741B34 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7265531D6709649999752391 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		92178DC11DE2B94900A2622B /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
-		92178DC51DE2B94900A2622B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5D018F0F83D4FB6BD6DC807 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA05CA5918E7F6950063557B /* FavVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavVC.h; sourceTree = "<group>"; };
 		AA05CA5A18E7F6950063557B /* FavVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FavVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -707,15 +705,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		92178DC01DE2B94900A2622B /* ForestExtension */ = {
-			isa = PBXGroup;
-			children = (
-				92178DC11DE2B94900A2622B /* ActionRequestHandler.swift */,
-				92178DC51DE2B94900A2622B /* Info.plist */,
-			);
-			path = ForestExtension;
-			sourceTree = "<group>";
-		};
 		AA025080190C7143008A7B65 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -882,7 +871,6 @@
 				AA0E5C7418ECCA5F00549575 /* resources */,
 				AA51887118B51F0300AABC2B /* src */,
 				AA51889618B51F0300AABC2B /* ForestTests */,
-				92178DC01DE2B94900A2622B /* ForestExtension */,
 				AA51886A18B51F0300AABC2B /* Frameworks */,
 				AA51886918B51F0300AABC2B /* Products */,
 				FBA194F08DFB14B6C67726A4 /* Pods */,

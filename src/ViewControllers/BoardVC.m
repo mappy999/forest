@@ -93,6 +93,33 @@
                                                                                                              action:@selector(fuga:)];
     longPressGestureRecognizer.minimumPressDuration = 0.7;
     [self.tableView addGestureRecognizer:longPressGestureRecognizer];
+    
+    self.tableView.editing=false;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+{
+    
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleNone;
+}
+
+- (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO;
 }
 
 - (void)fuga:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -254,13 +281,15 @@
             initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
                                  target:self
                                  action:@selector(onSearch:)];
-
         self.navigationItem.leftBarButtonItems = @[ refreshBarButton, addExternalBarButton ];
-        self.navigationItem.rightBarButtonItems = @[ searchBarButton ];
+        self.navigationItem.rightBarButtonItems = @[ searchBarButton];
+        
     }
 
     return self;
 }
+
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -442,6 +471,7 @@
         }
     }
 }
+
 
 - (void)refreshed:(id)sender
 {
