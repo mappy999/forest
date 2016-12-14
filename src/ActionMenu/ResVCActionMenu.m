@@ -70,7 +70,7 @@
     } else {
         if (self.moveBoardButtonInfo == nil) {
             
-            self.openInSafariInfo = [[ActionButtonInfo alloc] initWithTitle:@"Safariで開く" withImageName:@"next_thread_30.png"];
+            self.openInSafariInfo = [[ActionButtonInfo alloc] initWithTitle:@"Safari\nで開く" withImageName:@"next_thread_30.png"];
             self.moveBoardButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"板へ" withImageName:@"home2_30.png"];
             self.nextSearchButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"次スレ検索" withImageName:@"flash_light.png"];
             self.toolButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"他ツール" withImageName:nil];

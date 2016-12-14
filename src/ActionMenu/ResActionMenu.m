@@ -34,6 +34,7 @@
 @property (nonatomic) ActionButtonInfo *selectTextButtonInfo;
 @property (nonatomic) ActionButtonInfo *toggleAAButtonInfo;
 @property (nonatomic) ActionButtonInfo *popupCenterButtonInfo;
+@property (nonatomic) ActionButtonInfo *openresinSafariInfo;
 
 //for NG
 @property (nonatomic) ActionButtonInfo *ngWordButtonInfo;
@@ -106,6 +107,8 @@
             self.selectTextButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"文字選択" withImageName:@"text_30.png"];
             self.popupCenterButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"元位置\n参照" withImageName:@"home2_30.png"];
             self.toggleAAButtonInfo = [[ActionButtonInfo alloc] initWithTitle:@"AAモード\n切替" withImageName:@"aa_30.png"];
+            self.openresinSafariInfo=[[ActionButtonInfo alloc] initWithTitle:@"Safariで\nレスを開く"withImageName:@"next_thread_30.png"];
+            
 
         }
 
@@ -116,6 +119,7 @@
             self.myResButtonInfo,
             self.popupCenterButtonInfo,
             self.selectTextButtonInfo,
+            self.openresinSafariInfo,
             self.toggleAAButtonInfo
         ];
 
@@ -346,6 +350,11 @@
             
 
 
+        } else if (info == self.openresinSafariInfo){
+            NSString *openurl=[[self.resVC.th threadUrl] stringByAppendingString:[NSString stringWithFormat:@"%d",self.res.number]];
+            
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openurl]];
         }
     }
 
