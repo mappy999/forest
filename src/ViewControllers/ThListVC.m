@@ -290,8 +290,10 @@ static const NSInteger kSelectedModeUnread = 2;
     NSString *buttonText = nil;
     if (self.speedButtonMode == 0) {
         buttonText = @"勢い";
-    } else {
+    } else if(self.speedButtonMode ==1) {
         buttonText = @"総数";
+    } else {
+        buttonText = @"勢い+";
     }
     [self.speedOrderButton setTitle:buttonText];
 }
@@ -458,8 +460,10 @@ static const NSInteger kSelectedModeUnread = 2;
         NSArray *sortedThList = nil;
         if (self.speedButtonMode == 0) { //勢い
             sortedThList = [self.allThVmList sortedArrayUsingSelector:@selector(compareSpeed:)];
-        } else { //カウント
+        } else if (self.speedButtonMode ==1 ){ //カウント
             sortedThList = [self.allThVmList sortedArrayUsingSelector:@selector(compareCount:)];
+        } else {
+            sortedThList = [self.allThVmList sortedArrayUsingSelector:@selector(compareSpeedplus:)];
         }
         self.thVmList = [NSMutableArray arrayWithArray:sortedThList];
 
@@ -516,11 +520,7 @@ static const NSInteger kSelectedModeUnread = 2;
 - (IBAction)onSpeedButtonAction:(id)sender
 {
     if (self.selectedSortButton == self.speedOrderButton) {
-        if (self.speedButtonMode == 0) {
-            self.speedButtonMode = 1;
-        } else {
-            self.speedButtonMode = 0;
-        }
+        self.speedButtonMode=(self.speedButtonMode+1)%3;
 
         [Env setConfInteger:self.speedButtonMode forKey:kSpeedButtonModeKey];
     }

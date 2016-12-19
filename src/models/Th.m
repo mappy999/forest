@@ -171,6 +171,14 @@
 
     return speed;
 }
+-(float)calcSpeedplus
+{
+    [self calcSpeedIfNot];
+    float speedplus = sqrt(self.speed)*logf(self.count);
+    
+    self.speedplus = speedplus;
+    return speedplus;
+}
 
 //勢いを計算していないと思われる場合のみ
 //勢いによる並び替えをするときに使われる
@@ -178,6 +186,13 @@
 {
     if (self.speed == 0) {
         [self calcSpeed];
+    }
+}
+
+-(void) calcSpeedplusIfNot
+{
+    if(self.speedplus==0) {
+        [self calcSpeedplus];
     }
 }
 
@@ -363,6 +378,23 @@
     } else if (self.speed > th.speed) {
         return NSOrderedAscending;
     } else if (self.speed < th.speed) {
+        return NSOrderedDescending;
+    } else {
+        return NSOrderedSame;
+    }
+}
+
+- (NSComparisonResult)compareSpeedplus:(Th *)th
+{
+    [self calcSpeedplusIfNot];
+    [th calcSpeedplusIfNot];
+    if (self.count >= 1000 && th.count < 1000)
+        return NSOrderedDescending;
+    else if (th.count >= 1000 && self.count < 1000) {
+        return NSOrderedAscending;
+    } else if (self.speedplus > th.speedplus) {
+        return NSOrderedAscending;
+    } else if (self.speedplus < th.speedplus) {
         return NSOrderedDescending;
     } else {
         return NSOrderedSame;

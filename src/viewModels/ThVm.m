@@ -70,6 +70,12 @@
 {
     return [self.th compareSpeed:thVm.th];
 }
+
+- (NSComparisonResult)compareSpeedplus:(ThVm *)thVm
+{
+    return [self.th compareSpeedplus:thVm.th];
+}
+
 - (NSComparisonResult)compareCreated:(ThVm *)thVm
 {
     if (self.th.key > thVm.th.key) {

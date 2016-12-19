@@ -55,7 +55,7 @@ typedef enum {
 @property (nonatomic) BOOL isFav;
 
 @property (nonatomic) NSUInteger tempHighlightResNumber;
-
+@property (nonatomic) float speedplus;
 @property (nonatomic) float speed;
 @property (nonatomic) ResNGInspector *resNGInspector;
 
@@ -66,6 +66,7 @@ typedef enum {
 
 - (NSComparisonResult)comparelastReadTime:(Th *)th;
 - (NSComparisonResult)compareSpeed:(Th *)th;
+- (NSComparisonResult)compareSpeedplus:(Th *)th;
 - (NSComparisonResult)compareCount:(Th *)th;
 - (NSComparisonResult)compareNumber:(Th *)th;
 
@@ -88,6 +89,9 @@ typedef enum {
 
 - (float)calcSpeed;
 - (void)calcSpeedIfNot;
+
+-(float) calcSpeedplus;
+-(void) calcSpeedplusIfNot;
 
 - (NSString *)datFilePath:(BOOL)create;
 - (NSString *)datFilePath; //create = YES 無いときは生成
