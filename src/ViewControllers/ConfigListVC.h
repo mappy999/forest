@@ -52,5 +52,6 @@
 
 - (IBAction)syncLevelChanged:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField *syncCryptPasswordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *bbsMenuURLTextField;
 
 @end

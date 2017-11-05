@@ -70,6 +70,7 @@
     self.syncCryptLevelSegment.selectedSegmentIndex = [Env getConfIntegerForKey:@"syncCryptLevel" withDefault:0];
     [self.syncCryptPasswordTextField setSecureTextEntry:YES];
     self.syncCryptPasswordTextField.text = [Env getConfStringForKey:@"syncCryptPass" withDefault:@""];
+    self.bbsMenuURLTextField.text = [Env getConfStringForKey:@"bbsMenuURL" withDefault:@"http://menu.5ch.net/bbsmenu.html"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -235,5 +236,11 @@
     NSString *localjsCode = [NSString stringWithContentsOfFile:localpath encoding:NSUTF8StringEncoding error:nil];
     self.convertScriptTextField.text = localjsCode;
 }
+
+- (IBAction)bbsmenu_edit_end:(id)sender {
+    UITextField *f = sender;
+    [Env setConfString:f.text forKey:@"bbsMenuURL"];
+}
+
 
 @end
