@@ -12,7 +12,7 @@
 #import "Env.h"
 #import "UpdateAllTransaction.h"
 #import "TabContextMenu.h"
-#import <FMDatabase.h>
+#import <fmdb/FMDatabase.h>
 #import "MySplitVC.h"
 
 static NSString *HistoryTableName = @"history";

@@ -1,5 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
-#import <SDImageCache.h>
+#import <SDWebImage/SDImageCache.h>
 
 #import "ResTableViewCell.h"
 #import "TextUtils.h"

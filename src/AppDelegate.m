@@ -7,7 +7,7 @@
 #import "TopWindow.h"
 #import "Env.h"
 #import "ResTransaction.h"
-#import <SDImageCache.h>
+#import <SDWebImage/SDImageCache.h>
 #import <GLKit/GLKit.h>
 
 @implementation AppDelegate

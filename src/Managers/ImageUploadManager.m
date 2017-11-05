@@ -2,7 +2,7 @@
 #import "ImageUploadManager.h"
 #import "ResVm.h"
 #import <SDWebImage/SDWebImageManager.h>
-#import <FMDatabase.h>
+#import <fmdb/FMDatabase.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
 
 @implementation ImageUploadEntry

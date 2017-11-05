@@ -5,7 +5,8 @@
 #import "ActionLayout.h"
 #import "ThemeManager.h"
 #import "NGManager.h"
-#import "SDWebImageManager.h"
+#import <SDWebImage/SDWebImageManager.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "SearchWebViewController.h"
 #import "Th+ParseAdditions.h"
 #import "CopyVC.h"
