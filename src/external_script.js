@@ -6,15 +6,18 @@ function parse(url, startResNumber, html) {
     var reset = function() {
         num = mail = name = body = date = "";
     };
-
+    html = html.replace(/span/g, 'div');
+    html = html.replace(/div class="escaped"/g, 'span class="escaped"');
     var attrRegex = new RegExp(/([^\s]+)=\"([^\"]+)\"/g); 
     var onSeg = function onSeg(attrs, contents) {
         var all = [], arr; 
         if (attrs) {
             while ((arr = attrRegex.exec(attrs)) != null) {
-                var attrName = arr[1], value = arr[2];
+                var attrName = arr[1];
+                var value = arr[2];
                 if(attrName == "class") {
-                    var cls = arr[2];
+                    var wk = arr[2];
+                    var cls = wk.replace("/:/", "").replace("/ /", "");
                     if (cls == "post") {
                         addLine();
                         reset();
@@ -25,7 +28,7 @@ function parse(url, startResNumber, html) {
                         }
                         name = contents.replace(/<([^<>]*)>/g,'');
                     } else if (cls=="message") {
-                        body = contents;
+                        body = contents + "</span>";
                     } else if (cls == "date") {
                         date= (contents);
                     }
@@ -36,8 +39,8 @@ function parse(url, startResNumber, html) {
         }
     }
 
-
     var addLine = function() {
+
         if (name && body && Number(num) >= Number(startResNumber)) {
             lines += name + "<>" + mail + "<>" + date + "<>" + body + "<>";
             if (num == 1) {
@@ -181,5 +184,3 @@ var convertHtml2Dat = function(url, startResNumber, html) {
 
     return dat;
 };
-
-
