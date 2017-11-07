@@ -220,9 +220,9 @@
 
     request.HTTPBody = nil;
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
                              if (error) {
                                  // エラー処理を行う。
@@ -273,6 +273,7 @@
                                  }
                              }
                            }];
+    [task resume];
 }
 
 // アラートのボタンが押された時に呼ばれるデリゲート例文
@@ -308,9 +309,9 @@
 
     request.HTTPBody = nil;
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
                              themeEntry.isDownloading = NO;
                              if (error) {
@@ -390,6 +391,7 @@
                                  }
                              }
                            }];
+    [task resume];
 }
 
 - (NSString *)tempZipPath:(NSString *)suffix
@@ -437,10 +439,9 @@
 
     request.HTTPBody = requestData;
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                              if (error) {
                                  // エラー処理を行う。
                                  if (error.code == -1003) {
@@ -484,6 +485,7 @@
                                  }
                              }
                            }];
+    [task resume];
 }
 
 @end

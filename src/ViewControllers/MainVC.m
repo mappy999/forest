@@ -419,11 +419,10 @@ static MainVC *_instance;
     request.HTTPMethod = @"GET";
     
     
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+
          if (error) {
              dispatch_async(dispatch_get_main_queue(), ^{
                        });
@@ -478,6 +477,7 @@ static MainVC *_instance;
          
          
      }];
+    [task resume];
     
     //    [[sender window] setDocumentEdited:NO];
     

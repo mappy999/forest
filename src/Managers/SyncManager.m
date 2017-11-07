@@ -118,9 +118,9 @@ static SyncManager *_sharedSyncManager;
 
     request.HTTPBody = [body dataUsingEncoding:NSUTF8StringEncoding];
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
                              if (error) {
                                  if (error.code == -1003) {
@@ -152,6 +152,7 @@ static SyncManager *_sharedSyncManager;
 
                              self.isSynchronizing = NO;
                            }];
+    [task resume];
 }
 
 + (NSString *)xmlEscape:(NSString *)str

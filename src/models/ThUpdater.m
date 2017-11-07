@@ -9,7 +9,7 @@
 
 static JSContext *_context;
 
-@interface ThUpdater ()
+@interface ThUpdater ()<NSURLSessionDelegate>
 
 
 @end
@@ -138,29 +138,82 @@ static JSContext *_context;
         [request addValue:@"text" forHTTPHeaderField:@"Accept-Encoding"];
     }
 
-
-    NSURLConnection *aConnection = [[NSURLConnection alloc]
-         initWithRequest:request
-                delegate:self
-        startImmediately:NO];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      if (aConnection != nil) {
-          [aConnection start]; //これで、MyConnectionがRunLoopにattachされる
-          [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];
-      }
-    });
-
-    if (!aConnection) {
-        myLog(@"connection error.");
-        self.th.isUpdating = NO;
-        [self finalize:nil];
-        return nil;
-    }
-
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"did finish download.\n%@", response.URL);
+        if (error) {
+            NSLog(@"%@", error);
+            [self connection:nil didFailWithError:error];
+            return;
+        }
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode != 200) {
+            [self connection:nil didFailWithError:nil];
+            return;
+        }
+        self.response = (NSHTTPURLResponse *)response;
+        self.receivedData = [NSMutableData dataWithData:data];
+        [self connectionDidFinishLoading:nil];
+    }];
+    [task resume];
     return nil;
 }
+/*
+ NSURLSessionのdelegateにしようとしたが一旦もどきに変項したので下の3つはダミー
+ 
+ */
+/**
+ * HTTPリクエストのデリゲートメソッド(データ受け取り初期処理)
+ */
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+didReceiveResponse:(NSURLResponse *)response
+ completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler {
+    self.receivedData = [[NSMutableData alloc] init];
+    
+    self.response = (NSHTTPURLResponse *)response;
+    myLog(@"response %ld", (long)[self.response statusCode]);
+    
+    // didReceivedData と didCompleteWithError が呼ばれるように、通常継続の定数をハンドラーに渡す
+    completionHandler(NSURLSessionResponseAllow);
+}
 
+/**
+ * HTTPリクエストのデリゲートメソッド(受信の度に実行)
+ */
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data {
+    [self.receivedData appendData:data];
+    
+    NSString *contentLength = [self.response.allHeaderFields objectForKey:@"Content-Length"];
+    
+    if (contentLength) {
+        self.progress = self.receivedData.length / (float)[contentLength intValue];
+    }
+}
+
+/**
+ * HTTPリクエストのデリゲートメソッド(完了処理)
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error {
+    if (error) {
+        // HTTPリクエスト失敗処理
+        myLog(@"didFailWithError Error");
+        ;
+        self.th.isUpdating = NO;
+        [self finalize:nil];
+    } else {
+        // HTTPリクエスト成功処理
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+            @synchronized(self.th)
+            {
+                [self dealWithReceivedData];
+            }
+        });
+        
+    }
+}
 /**
  * Instructs the delegate that authentication for challenge has
  * been cancelled for the request loading on connection.
@@ -219,6 +272,10 @@ static JSContext *_context;
     NSInteger statusCode = [self.response statusCode];
 
     NSLog(@"statusCode = %zd", statusCode);
+    if (statusCode == 302)
+    {
+        NSDictionary * headers = [self.response allHeaderFields];
+    }
 
     NSString *lastModified = nil; //self.lastModified;
     NSString *etag = nil;         //self.etag;

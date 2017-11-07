@@ -181,6 +181,7 @@ static NSString *_recentBoardsPath;
 
 - (void)fetchBBSMenuAsync
 {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     NSString *bbsMenu = [Env getConfStringForKey:@"bbsMenuURL" withDefault:@"http://menu.5ch.net/bbsmenu.html"];
 
     NSURL *nsurl = [NSURL URLWithString:bbsMenu];
@@ -190,17 +191,38 @@ static NSString *_recentBoardsPath;
 
     // ヘッダー情報を追加する。
     [request addValue:[Env userAgent] forHTTPHeaderField:@"User-Agent"];
-    NSData *data = [NSURLConnection sendSynchronousRequest:request
-                                         returningResponse:&response
-                                                     error:&error];
+    //NSData *data = [NSURLConnection sendSynchronousRequest:request
+    //                                     returningResponse:&response
+    //                                                 error:&error];
 
-    NSString *errorStr = [error localizedDescription];
-    if (0 < [errorStr length]) {
-        return;
-    }
+    //NSString *errorStr = [error localizedDescription];
+    //if (0 < [errorStr length]) {
+    //    return;
+    //}
 
-    NSString *dataString = nil;
-    dataString = [[NSString alloc] initWithData:data encoding:NSShiftJISStringEncoding];
+    __block NSString *dataString = nil;
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"did finish download.\n%@", response.URL);
+        if (error) {
+            NSLog(@"%@", error);
+            dispatch_semaphore_signal(semaphore);
+            return;
+        }
+        
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode != 200) {
+            dispatch_semaphore_signal(semaphore);
+            return;
+        }
+        dataString = [[NSString alloc] initWithData:data encoding:NSShiftJISStringEncoding];
+        dispatch_semaphore_signal(semaphore);
+        
+    }];
+    [task resume];
+
+    //dataString = [[NSString alloc] initWithData:data encoding:NSShiftJISStringEncoding];
     if (dataString != nil) {
         BoardMenuParser *parser = [BoardMenuParser alloc];
 
@@ -208,6 +230,7 @@ static NSString *_recentBoardsPath;
 
         [self updateBoardsWithUpdate:categories];
     }
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
 - (void)saveBoardsAsync

@@ -230,9 +230,9 @@ static NSString *const COL_ImageKey = @"imageKey";
 
     request.HTTPBody = body;
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                              entry.isUploading = NO;
 
                              if (error) {
@@ -307,6 +307,7 @@ static NSString *const COL_ImageKey = @"imageKey";
 
                              [self _startUpload];
                            }];
+    [task resume];
 }
 
 - (void)deleteImage:(ImageUploadEntry *)entry completion:(void (^)(BOOL))completionBlock
@@ -317,9 +318,9 @@ static NSString *const COL_ImageKey = @"imageKey";
     request.HTTPMethod = @"GET";
     [request setTimeoutInterval:140];
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
                              if (error) {
                                  if (error.code == -1003) {
@@ -366,6 +367,7 @@ static NSString *const COL_ImageKey = @"imageKey";
 
 
                            }];
+    [task resume];
 }
 
 @end

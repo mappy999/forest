@@ -222,9 +222,9 @@
 
     // リクエストを送信する。
     // 第３引数のブロックに実行結果が渡される。
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
                              if (error) {
                                  // エラー処理を行う。
@@ -280,6 +280,7 @@
                                }
                              });
                            }];
+    [task resume];
 }
 
 - (IBAction)rouninIDChanged:(id)sender
@@ -347,9 +348,9 @@
 
     request.HTTPBody = requestData;
 
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
                              if (error) {
                                  // エラー処理を行う。
@@ -408,6 +409,7 @@
                                [self updateBELabel];
                              });
                            }];
+    [task resume];
 }
 
 - (NSString *)urlEncWithSHIFT_JIS:(NSString *)str
