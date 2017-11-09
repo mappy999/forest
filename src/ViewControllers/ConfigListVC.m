@@ -71,6 +71,8 @@
     [self.syncCryptPasswordTextField setSecureTextEntry:YES];
     self.syncCryptPasswordTextField.text = [Env getConfStringForKey:@"syncCryptPass" withDefault:@""];
     self.bbsMenuURLTextField.text = [Env getConfStringForKey:@"bbsMenuURL" withDefault:@"http://menu.5ch.net/bbsmenu.html"];
+    self.proxyServerTextField.text = [Env getConfStringForKey:@"proxyServer" withDefault:@""];
+    [self.proxyEnableSwitch setOn:[Env getConfBOOLForKey:@"proxyEnable" withDefault:NO]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -242,5 +244,12 @@
     [Env setConfString:f.text forKey:@"bbsMenuURL"];
 }
 
+- (IBAction)proxyServerEditEnd:(id)sender {
+    UITextField *f = sender;
+    [Env setConfString:f.text forKey:@"proxyServer"];
+}
+- (IBAction)proxyEnableChanged:(id)sender {
+    [Env setConfBOOL:_proxyEnableSwitch.isOn forKey:@"proxyEnable"];
+}
 
 @end

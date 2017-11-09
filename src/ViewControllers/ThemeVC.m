@@ -8,6 +8,7 @@
 #import "BaseModalNavigationVC.h"
 #import "ThemeManager.h"
 #import "SSZipArchive.h"
+#import "NetworkManager.h"
 
 @interface ThemeVC ()
 
@@ -220,7 +221,7 @@
 
     request.HTTPBody = nil;
 
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
@@ -309,7 +310,7 @@
 
     request.HTTPBody = nil;
 
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
@@ -439,7 +440,7 @@
 
     request.HTTPBody = requestData;
 
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                              if (error) {

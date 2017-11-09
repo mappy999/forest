@@ -37,6 +37,9 @@ extern CGFloat thinLineWidth;
 + (NSString *)iosVersion;
 + (BOOL)hasInVersionFile;
 
++ (void)setProxyEnabled:(BOOL)enabled;
++ (BOOL)getProxyEnabled;
+
 // 0: preserve state
 // 1: always tree
 // 2: always res order

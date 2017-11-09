@@ -6,6 +6,7 @@
 #import "AccountConfVC.h"
 #import "Env.h"
 #import "CookieManager.h"
+#import "NetworkManager.h"
 
 @interface AccountConfVC ()
 
@@ -222,7 +223,7 @@
 
     // リクエストを送信する。
     // 第３引数のブロックに実行結果が渡される。
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
@@ -348,7 +349,7 @@
 
     request.HTTPBody = requestData;
 
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 

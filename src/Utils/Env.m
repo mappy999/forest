@@ -7,6 +7,7 @@ static BOOL _treeEnabledLoaded;
 static BOOL _autoMarkEnabled;
 static NSInteger _treeModeConfig;
 static BOOL _anchorPopupTreeEnabled;
+static BOOL _proxyEnabled;
 
 static CGFloat _threadTitleSize;
 static NSInteger _threadTitleSizeIncrement;
@@ -273,6 +274,14 @@ static BOOL _userAgentIndexDetermined;
     }
 }
 
++ (void)setProxyEnabled:(BOOL)enabled
+{
+    if (_proxyEnabled != enabled) {
+        [Env setConfBOOL:enabled forKey:@"proxyEnabled"];
+        _proxyEnabled = enabled;
+    }
+}
+
 + (NSInteger)getOrientation
 {
     if (_orientationInitialized == NO) {
@@ -332,6 +341,7 @@ static BOOL _userAgentIndexDetermined;
  */
 
 + (BOOL)getAutoMarkEnabled { return _autoMarkEnabled; }
++ (BOOL)getProxyEnabled { return _proxyEnabled; }
 
 //Font Size
 

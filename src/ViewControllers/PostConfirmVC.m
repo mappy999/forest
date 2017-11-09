@@ -11,6 +11,7 @@
 #import "PostNaviVC.h"
 #import "TextUtils.h"
 #import "AccountConfVC.h"
+#import "NetworkManager.h"
 
 // 書き込み確認・承認・待機ダイアログ
 
@@ -295,7 +296,7 @@
 
       request.HTTPBody = requestData;
 
-        NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
         NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 

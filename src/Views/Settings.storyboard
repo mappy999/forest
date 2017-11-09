@@ -323,20 +323,30 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WNo-Jw-IeC">
-                                                    <rect key="frame" x="334" y="11" width="25" height="30"/>
+                                                    <rect key="frame" x="111" y="11" width="248" height="30"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="bbsmenu_edit_end:" destination="G6e-ap-Swu" eventType="editingDidEnd" id="ML2-Mn-PuY"/>
+                                                        <action selector="proxyServerEditEnd:" destination="G6e-ap-Swu" eventType="editingDidEnd" id="pTs-Nc-Fi3"/>
                                                     </connections>
                                                 </textField>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TVl-tZ-zbq">
+                                                    <rect key="frame" x="52" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="proxyEnableChanged:" destination="G6e-ap-Swu" eventType="valueChanged" id="4z2-Z7-WaU"/>
+                                                    </connections>
+                                                </switch>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="WNo-Jw-IeC" firstAttribute="leading" secondItem="TVl-tZ-zbq" secondAttribute="trailing" constant="10" id="6Zv-ZX-Z6S"/>
+                                                <constraint firstItem="TVl-tZ-zbq" firstAttribute="top" secondItem="Wl7-5Y-Zry" secondAttribute="top" constant="6" id="Dtc-ZG-VTG"/>
                                                 <constraint firstItem="mLe-BU-42V" firstAttribute="leading" secondItem="Wl7-5Y-Zry" secondAttribute="leadingMargin" id="Rnh-II-gWd"/>
+                                                <constraint firstItem="WNo-Jw-IeC" firstAttribute="top" secondItem="Wl7-5Y-Zry" secondAttribute="top" constant="11" id="Xdr-Wt-Gwy"/>
                                                 <constraint firstItem="mLe-BU-42V" firstAttribute="top" secondItem="Wl7-5Y-Zry" secondAttribute="topMargin" constant="1" id="al4-BD-lD4"/>
                                                 <constraint firstAttribute="trailing" secondItem="WNo-Jw-IeC" secondAttribute="trailing" constant="16" id="c7b-jQ-EsP"/>
                                                 <constraint firstItem="WNo-Jw-IeC" firstAttribute="top" secondItem="Wl7-5Y-Zry" secondAttribute="top" constant="11" id="k6G-zA-MsP"/>
+                                                <constraint firstItem="TVl-tZ-zbq" firstAttribute="leading" secondItem="mLe-BU-42V" secondAttribute="trailing" constant="10" id="noV-ur-ocP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -735,6 +745,8 @@
                         <outlet property="bbsMenuURLTextField" destination="myQ-1B-JHA" id="rwL-Jm-oE6"/>
                         <outlet property="convertScriptTextField" destination="7Je-so-dQd" id="4tZ-By-iCg"/>
                         <outlet property="orientationSegmentControl" destination="wFN-ut-ms2" id="N4n-RE-grj"/>
+                        <outlet property="proxyEnableSwitch" destination="TVl-tZ-zbq" id="1k1-fs-xXQ"/>
+                        <outlet property="proxyServerTextField" destination="WNo-Jw-IeC" id="nmt-58-Cje"/>
                         <outlet property="resAutoMarkSwitch" destination="oDU-gy-bPV" id="jTx-qp-KfP"/>
                         <outlet property="screenModeSegmentedControl" destination="Qcj-zR-HRh" id="N1H-la-e4A"/>
                         <outlet property="sync2chButton" destination="rJp-ej-Bac" id="FRh-1o-0Le"/>

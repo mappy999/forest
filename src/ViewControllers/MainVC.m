@@ -21,6 +21,7 @@
 #import "SearchWebViewController.h"
 #import "MySplitVC.h"
 #import "UIViewController+WrapWithNavigationController.h"
+#import "NetworkManager.h"
 
 static MainVC *_instance;
 
@@ -419,7 +420,7 @@ static MainVC *_instance;
     request.HTTPMethod = @"GET";
     
     
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 

@@ -5,6 +5,7 @@
 #import "Env.h"
 #import "Category.h"
 #import "Board.h"
+#import "NetworkManager.h"
 
 //
 // 板の情報を格納します（板のキー => Boardオブジェクト）
@@ -201,8 +202,8 @@ static NSString *_recentBoardsPath;
     //}
 
     __block NSString *dataString = nil;
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"did finish download.\n%@", response.URL);
         if (error) {

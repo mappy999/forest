@@ -17,6 +17,17 @@
     return self.host != nil && self.boardKey != nil && ([self.host hasSuffix:@".2ch.net"]||[self.host hasSuffix:@".5ch.net"]);
 }
 
+- (BOOL)is2chsc
+{
+    return self.host != nil && self.boardKey != nil && [self.host hasSuffix:@".2ch.sc"];
+}
+
+- (BOOL)isopen2ch
+{
+    return self.host != nil && self.boardKey != nil && [self.host hasSuffix:@".open2ch.net"];
+}
+
+
 - (BOOL)isShitaraba
 {
     return _host != nil && ([_host rangeOfString:@"jbbs.shitaraba.net"].location != NSNotFound || [_host rangeOfString:@"jbbs.livedoor.jp"].location != NSNotFound);

@@ -6,6 +6,7 @@
 #import "ThManager.h"
 #import "FavVC.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import "NetworkManager.h"
 
 static JSContext *_context;
 
@@ -138,8 +139,8 @@ static JSContext *_context;
         [request addValue:@"text" forHTTPHeaderField:@"Accept-Encoding"];
     }
 
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"did finish download.\n%@", response.URL);
         if (error) {

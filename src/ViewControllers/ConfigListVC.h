@@ -54,5 +54,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *syncCryptPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *bbsMenuURLTextField;
 @property (weak, nonatomic) IBOutlet UITextField *userAgentTextField;
+@property (weak, nonatomic) IBOutlet UISwitch *proxyEnableSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *proxyServerTextField;
 
 @end

@@ -6,13 +6,15 @@ typedef enum {
     BBS_SHITARABA,
     BBS_PINK,
     BBS_MACHI,
-    BBS_EXTERNAL
+    BBS_EXTERNAL,
+    BBS_2CHSC,
+    BBS_OPEN2CH,
 } BBSType;
 
 typedef enum {
     BBSST_2CH_COMP,  // 2ch互換 (test/read.cgi, SHIFT_JIS)
     BBSST_SHITARABA, // EUC-JP
-    BBSST_MACHI      //SHIFT_JIS
+    BBSST_MACHI,      //SHIFT_JIS
 } BBSSubType;
 
 //
@@ -34,6 +36,8 @@ typedef enum {
 @property (nonatomic, copy) NSString *serverDir;
 
 - (BOOL)is2ch;
+- (BOOL)is2chsc;
+- (BOOL)isopen2ch;
 - (BOOL)isPink;
 - (BOOL)isShitaraba;
 - (BOOL)isMachiBBS;

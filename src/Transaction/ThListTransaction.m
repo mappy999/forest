@@ -12,6 +12,7 @@
 #import "NextSearchVC.h"
 #import "MyNavigationVC.h"
 #import "MySplitVC.h"
+#import "NetworkManager.h"
 
 @implementation ThListTransaction
 
@@ -57,6 +58,8 @@
 // スレ一覧の更新
 - (NSArray *)loadThreadListWithBoard:(Board *)board
 {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+
     NSString *subjectUrl = [board subjectUrl];
     myLog(@"url= %@", subjectUrl);
     NSURL *nsurl = [NSURL URLWithString:subjectUrl];
@@ -66,23 +69,29 @@
     [request addValue:@"close" forHTTPHeaderField:@"Connection"];
     [request addValue:@"text" forHTTPHeaderField:@"Accept-Encoding"];
 
-    NSURLConnection *aConnection = [[NSURLConnection alloc]
-         initWithRequest:request
-                delegate:self
-        startImmediately:NO];
 
-    [aConnection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [aConnection start];
-
-    // 作成に失敗する場合には、リクエストが送信されないので
-    // チェックする
-    if (!aConnection) {
-        myLog(@"connection error.");
-        //self.th.isUpdating = NO;
-        [self finalize:nil];
-        return nil;
-    }
-
+    
+    NSURLSessionConfiguration *configuration = [NetworkManager SessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"did finish download.\n%@", response.URL);
+        if (error) {
+            NSLog(@"%@", error);
+            [self connection:nil didFailWithError:error];
+            return;
+        }
+        
+        self.response = (NSHTTPURLResponse *)response;
+        if (self.response.statusCode != 200) {
+            [self connection:nil didFailWithError:nil];
+            return;
+        }
+        
+        self.receivedData = [NSMutableData dataWithData:data];
+        [self connectionDidFinishLoading:nil];
+    }];
+    [task resume];
+    
     return nil;
 }
 

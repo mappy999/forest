@@ -4,6 +4,7 @@
 #import <SDWebImage/SDWebImageManager.h>
 #import <fmdb/FMDatabase.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
+#import "NetworkManager.h"
 
 @implementation ImageUploadEntry
 
@@ -230,7 +231,7 @@ static NSString *const COL_ImageKey = @"imageKey";
 
     request.HTTPBody = body;
 
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                              entry.isUploading = NO;
@@ -318,7 +319,7 @@ static NSString *const COL_ImageKey = @"imageKey";
     request.HTTPMethod = @"GET";
     [request setTimeoutInterval:140];
 
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSessionConfiguration *sessionConfiguration = [NetworkManager SessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
