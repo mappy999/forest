@@ -73,6 +73,7 @@
     self.bbsMenuURLTextField.text = [Env getConfStringForKey:@"bbsMenuURL" withDefault:@"http://menu.5ch.net/bbsmenu.html"];
     self.proxyServerTextField.text = [Env getConfStringForKey:@"proxyServer" withDefault:@""];
     [self.proxyEnableSwitch setOn:[Env getConfBOOLForKey:@"proxyEnable" withDefault:NO]];
+    self.htmlDatSegment.selectedSegmentIndex = [Env getConfIntegerForKey:@"htmlDat" withDefault:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -250,6 +251,10 @@
 }
 - (IBAction)proxyEnableChanged:(id)sender {
     [Env setConfBOOL:_proxyEnableSwitch.isOn forKey:@"proxyEnable"];
+}
+- (IBAction)htmlDatChanged:(id)sender {
+    UISegmentedControl *segment = (UISegmentedControl *)sender;
+    [Env setConfInteger:segment.selectedSegmentIndex forKey:@"htmlDat"];
 }
 
 @end

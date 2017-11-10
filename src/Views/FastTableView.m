@@ -146,6 +146,7 @@
           self.isDoingBackgroundParse = YES;
           NSMutableArray *array = [NSMutableArray array];
 
+          dispatch_sync(dispatch_get_main_queue(), ^{
           NSInteger sections = [self numberOfSections];
           for (NSInteger section = 0; section < sections; section++) {
               NSInteger rows = [self numberOfRowsInSection:section];
@@ -156,6 +157,7 @@
                   }
               }
           }
+          });
 
           BOOL bottomUp = true;//self.th.reading  > [array count]/2;
           NSUInteger count = [array count];

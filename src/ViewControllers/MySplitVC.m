@@ -111,11 +111,15 @@ static NSString *const kTabletModeKey = @"tabletMode";
 
 - (CGFloat)thListTableViewWidth:(ThListBaseVC *)thListVC
 {
-    if (self.isTabletMode) {
-        return self.leftMyNavigationVC.view.bounds.size.width;
-    } else {
-        return self.phoneMyNavigationVC.view.bounds.size.width;
-    }
+    CGFloat result = 0.0;
+    //dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.isTabletMode) {
+            result = self.leftMyNavigationVC.view.bounds.size.width;
+        } else {
+            result =  self.phoneMyNavigationVC.view.bounds.size.width;
+        }
+    //});
+    return result;
 }
 
 - (void)didReceiveMemoryWarning

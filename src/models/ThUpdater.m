@@ -88,7 +88,7 @@ static JSContext *_context;
     NSString *datUrl = [self.th datUrl];
     self.startResNumber = 1;
     BOOL useDiffModeForReadCGI = YES;
-    if ([self.th is2ch] || [self.th isPink]) {
+    if (([self.th is2ch] || [self.th isPink]) && ([Env getConfIntegerForKey:@"htmlDat" withDefault:0] == 0)) {
         if (useDiffModeForReadCGI) {
             self.startResNumber = (self.th.localCount + 1);
             NSInteger requestFrom = self.startResNumber > 1 ? self.startResNumber - 1 : self.startResNumber;

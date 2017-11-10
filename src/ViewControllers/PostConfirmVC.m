@@ -304,7 +304,7 @@
                                    // エラー処理を行う。
                                    if (error.code == -1003) {
                                        NSLog(@"not found hostname. targetURL=%@", url);
-                                   } else if (-1019) {
+                                   } else if (error.code == -1019) {
                                        NSLog(@"auth error. reason=%@", error);
                                    } else {
                                        NSLog(@"unknown error occurred. reason = %@", error);

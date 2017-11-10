@@ -218,19 +218,19 @@ static NSString *_recentBoardsPath;
             return;
         }
         dataString = [[NSString alloc] initWithData:data encoding:NSShiftJISStringEncoding];
+        if (dataString != nil) {
+            BoardMenuParser *parser = [BoardMenuParser alloc];
+            
+            NSArray *categories = [parser parse:dataString];
+            
+            [self updateBoardsWithUpdate:categories];
+        }
         dispatch_semaphore_signal(semaphore);
         
     }];
     [task resume];
 
     //dataString = [[NSString alloc] initWithData:data encoding:NSShiftJISStringEncoding];
-    if (dataString != nil) {
-        BoardMenuParser *parser = [BoardMenuParser alloc];
-
-        NSArray *categories = [parser parse:dataString];
-
-        [self updateBoardsWithUpdate:categories];
-    }
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 

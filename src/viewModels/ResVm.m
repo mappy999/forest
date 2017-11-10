@@ -204,7 +204,8 @@ const NSInteger kResNGReasonArea =  -7;
 
         
         UIViewController* vc = [[MySplitVC instance] resParentMyNavigationVC];
-        CGFloat width = vc.view.bounds.size.width;
+        CGFloat width = 0;
+        width = vc.view.bounds.size.width;
         if (self.priorCellWidth > 0) {
             width = self.priorCellWidth;
         }
