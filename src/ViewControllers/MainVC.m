@@ -23,6 +23,8 @@
 #import "UIViewController+WrapWithNavigationController.h"
 #import "NetworkManager.h"
 
+#define IS_IPHONE_X (([[UIScreen mainScreen] bounds].size.height-812)?NO:YES)
+
 static MainVC *_instance;
 
 @interface MainVC ()
@@ -43,6 +45,7 @@ static MainVC *_instance;
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     _instance = self;
 }
 
@@ -51,6 +54,8 @@ static MainVC *_instance;
     [[MyNavigationVC instance] setNavigationBarHidden:NO animated:NO];
 }
 
+#define kPhoneXTabBarHeight 45
+#define kTabBarHeight 49
 
 - (void)viewDidLoad
 {

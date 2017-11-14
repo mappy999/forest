@@ -1,9 +1,13 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13529"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoardVC">
@@ -15,20 +19,20 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f2B-ZQ-D2r" userLabel="leftTableContainer">
-                    <rect key="frame" x="0.0" y="0.0" width="160" height="568"/>
-                    <color key="backgroundColor" red="1" green="0.2003991973" blue="0.19257026059999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="0.0" y="0.0" width="187.66666666666666" height="812"/>
+                    <color key="backgroundColor" red="1" green="0.2003991973" blue="0.19257026059999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <accessibility key="accessibilityConfiguration" label=""/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDN-Jz-SC9" userLabel="rightTableContainer">
-                    <rect key="frame" x="160" y="0.0" width="160" height="568"/>
-                    <color key="backgroundColor" red="1" green="0.29447206770000001" blue="0.93292420970000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="187.66666666666663" y="0.0" width="187.33333333333337" height="812"/>
+                    <color key="backgroundColor" red="1" green="0.29447206770000001" blue="0.93292420970000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.18953034404692215" blue="0.26549955879539933" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="1" green="0.18953034404692215" blue="0.26549955879539933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="CDN-Jz-SC9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8Xu-R3-aig"/>
                 <constraint firstItem="f2B-ZQ-D2r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GwM-ST-mZl"/>
@@ -41,9 +45,4 @@
             </constraints>
         </view>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

@@ -183,13 +183,13 @@
           self.isDoingBackgroundParse = NO;
       }
 
-      dispatch_async(dispatch_get_main_queue(), ^{
+      //dispatch_async(dispatch_get_main_queue(), ^{
         if (self.isDecelerating == NO && self.isDragging == NO) {
             if (checkCellTag == self.statusIndex) {
                 [self reloadDataForStability];
             }
         }
-      });
+      //});
     });
 }
 

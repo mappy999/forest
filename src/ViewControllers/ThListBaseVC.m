@@ -360,7 +360,7 @@
                     }
                 }
             }
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
 
             [app.window showGestureInfo:showingGestureItem];
         }
@@ -386,13 +386,13 @@
                 }
             }
         }
-        AppDelegate *app = [UIApplication sharedApplication].delegate;
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [app.window dismissGestureInfo];
     } break;
 
     case UITouchPhaseCancelled: {
         [self.gesture touchesEnded:pos withEvent:event];
-        AppDelegate *app = [UIApplication sharedApplication].delegate;
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [app.window dismissGestureInfo];
     } break;
     default:

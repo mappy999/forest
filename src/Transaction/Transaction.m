@@ -55,5 +55,8 @@
 {
     [self didCancel:self];
 }
+- (void)didCancel:(Transaction*)obj
+{
+}
 
 @end

@@ -187,8 +187,8 @@ static NSString *_recentBoardsPath;
 
     NSURL *nsurl = [NSURL URLWithString:bbsMenu];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:nsurl];
-    NSHTTPURLResponse *response = nil;
-    NSError *error = nil;
+    //NSHTTPURLResponse *response = nil;
+    //NSError *error = nil;
 
     // ヘッダー情報を追加する。
     [request addValue:[Env userAgent] forHTTPHeaderField:@"User-Agent"];
@@ -230,8 +230,9 @@ static NSString *_recentBoardsPath;
     }];
     [task resume];
 
-    //dataString = [[NSString alloc] initWithData:data encoding:NSShiftJISStringEncoding];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    //while(dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW))
+    //    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1f]];
 }
 
 - (void)saveBoardsAsync

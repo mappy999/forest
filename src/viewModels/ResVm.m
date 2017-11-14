@@ -197,18 +197,26 @@ const NSInteger kResNGReasonArea =  -7;
 
 - (CGFloat)calcHeight
 {
+    __block CGFloat width = 0;
     if (self.cellHeight > -1) return self.cellHeight;
-    @synchronized(self)
-    {
-        if (self.cellHeight > -1) return self.cellHeight;
+    dispatch_sync(dispatch_get_main_queue(), ^{
 
-        
         UIViewController* vc = [[MySplitVC instance] resParentMyNavigationVC];
-        CGFloat width = 0;
         width = vc.view.bounds.size.width;
         if (self.priorCellWidth > 0) {
             width = self.priorCellWidth;
         }
+    });
+    @synchronized(self)
+    {
+        if (self.cellHeight > -1) return self.cellHeight;
+
+        //UIViewController* vc = [[MySplitVC instance] resParentMyNavigationVC];
+        //CGFloat width = 0;
+        //width = vc.view.bounds.size.width;
+        //if (self.priorCellWidth > 0) {
+        //    width = self.priorCellWidth;
+        //}
         
         BOOL isNGMode = NO;
         BOOL isBaseTransparent = NO;
