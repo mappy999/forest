@@ -14,7 +14,7 @@
 
 - (BOOL)is2ch
 {
-    return self.host != nil && self.boardKey != nil && [self.host hasSuffix:@".2ch.net"];
+    return self.host != nil && self.boardKey != nil && ([self.host hasSuffix:@".2ch.net"] || [self.host hasSuffix:@".5ch.net"]);
 }
 
 - (BOOL)isShitaraba

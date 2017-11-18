@@ -181,7 +181,7 @@ static NSString *_recentBoardsPath;
 
 - (void)fetchBBSMenuAsync
 {
-    NSString *bbsMenu = @"http://menu.2ch.net/bbsmenu.html";
+    NSString *bbsMenu = @"http://menu.5ch.net/bbsmenu.html";
     NSURL *nsurl = [NSURL URLWithString:bbsMenu];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:nsurl];
     NSHTTPURLResponse *response = nil;
