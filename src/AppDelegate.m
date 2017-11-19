@@ -9,6 +9,10 @@
 #import "ResTransaction.h"
 #import <SDWebImage/SDImageCache.h>
 #import <GLKit/GLKit.h>
+#import "SSZipArchive.h"
+#import "ThemeVC.h"
+#import "MySplitVC.h"
+#import "UIViewController+WrapWithNavigationController.h"
 
 @implementation AppDelegate
 
@@ -42,6 +46,34 @@
     if ([absoluteString length] > 18 && [absoluteString hasPrefix:@"forest2ch://"]) {
         NSString *thUrl = [NSString stringWithFormat:@"http://%@", [absoluteString substringFromIndex:[@"forest2ch://" length]]];
         [MainVC instance].requestOpenThreadUrl = thUrl;
+    }
+    else if ([[url pathExtension] isEqualToString:@"zip"])
+    {
+        NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *pathDocumentRoot = [paths objectAtIndex:0];
+        NSString *pathTheme = [pathDocumentRoot stringByAppendingString:@"/Forest/theme"];
+        
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSError * error = nil;
+        if (![manager fileExistsAtPath:pathTheme])
+        {
+            [manager createDirectoryAtPath:pathTheme withIntermediateDirectories:YES attributes:nil error:&error];
+        }
+        NSString *pathThemeFile = [pathTheme stringByAppendingPathComponent:[url  lastPathComponent]];
+        //if ([manager moveItemAtPath:[url path] toPath:pathThemeFile error:&error])
+        if ([SSZipArchive unzipFileAtPath:[url path] toDestination:pathTheme])
+        {
+            NSLog(@"pathname = %@",  pathTheme);
+            ThemeVC *manageVC = [[ThemeVC alloc] init];
+            id d = [manageVC wrapWithNavigationController];
+            
+            [[MySplitVC instance] presentViewController:d animated:YES completion:nil];
+
+        }
+        else
+        {
+            NSLog(@"%@.", error);
+        }
     }
 
     return YES;

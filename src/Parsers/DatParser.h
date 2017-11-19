@@ -9,9 +9,6 @@
 #import "IDNode.h"
 #import "Res.h"
 
-NSDictionary *charRefMap;
-void initCharRefMap();
-
 @class ReferScanner;
 @class TagScanner;
 @class URLScanner;
@@ -92,6 +89,9 @@ void initCharRefMap();
 //
 - (NSString *)substringOfCharacters:(unichar *)chars length:(NSUInteger)length;
 - (NSString *)substringOfCharacters:(unichar *)chars start:(int)start end:(int)end;
+
++ (NSDictionary *)charRefMap;
+
 @end
 
 //

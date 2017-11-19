@@ -15,7 +15,7 @@
 - (NSArray *)parse:(NSData *)data
 { //83928
 
-    initCharRefMap();
+    //initCharRefMap();
     NSString *text = [TextUtils decodeString:data encoding:[BBSItemBase boardEncodingWithBBSSubType:_subType] substitution:@"?"];
     // したらば
     // http://jbbs.shitaraba.net/[カテゴリ]/[掲示板番号]/subject.txt
