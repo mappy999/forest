@@ -447,6 +447,7 @@ static MainVC *_instance;
              } else {
                  if (httpStatusCode != 200) {
                      NSString* errorMsg = [NSString stringWithFormat:@"Error, status code: %@", @(httpStatusCode)];
+                     NSLog(errorMsg);
                      return;
                  }
                  

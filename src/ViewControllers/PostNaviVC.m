@@ -391,14 +391,14 @@
     self.bodyTextView.delegate = self;
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"戻る"
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(backPressed:)];
 
     self.navigationItem.leftBarButtonItem = backButton;
 
     UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithTitle:@"書き込み"
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(beginPost:)];
 

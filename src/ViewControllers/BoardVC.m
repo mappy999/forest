@@ -25,7 +25,7 @@
     [super viewDidLoad];
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"戻る"
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(backPressed:)];
 
@@ -33,7 +33,7 @@
     self.boardVC = boardVC;
 
     UIBarButtonItem *allButton = [[UIBarButtonItem alloc] initWithTitle:@"全体化"
-                                                                  style:UIBarButtonItemStyleBordered
+                                                                  style:UIBarButtonItemStylePlain
                                                                  target:self
                                                                  action:@selector(setAll:)];
 

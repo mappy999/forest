@@ -49,7 +49,7 @@
     self.itemArray = self.favFolders;
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"戻る"
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(backPressed:)];
 
