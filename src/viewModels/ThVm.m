@@ -554,12 +554,12 @@
 - (BOOL)isThisYear:(NSDate *)date
 {
     NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *components = [cal components:NSYearCalendarUnit fromDate:date];
+    NSDateComponents *components = [cal components:NSCalendarUnitYear fromDate:date];
     NSInteger year = [components year];
 
     NSDate *now = [NSDate date];
     NSCalendar *cal2 = [NSCalendar currentCalendar];
-    NSDateComponents *components2 = [cal2 components:NSYearCalendarUnit fromDate:now];
+    NSDateComponents *components2 = [cal2 components:NSCalendarUnitYear fromDate:now];
     return [components2 year] == year;
 }
 

@@ -56,4 +56,8 @@
     [self didCancel:self];
 }
 
+- (void) didCancel:(Transaction*)transaction
+{
+}
+
 @end

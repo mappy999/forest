@@ -1054,7 +1054,7 @@ static NSString *const LastCellIdentifier = @"LastCellIdentifier";
                     }
                 }
             }
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
+            AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
             [app.window showGestureInfo:showingGestureItem];
         }
 
