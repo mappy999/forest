@@ -143,14 +143,14 @@
     [self setEditing:YES];
 
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                   style:UIBarButtonItemStyleBordered
+                                                                   style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(backPressed:)];
 
     self.navigationItem.leftBarButtonItem = backButton;
 
     UIBarButtonItem *addNewButton = [[UIBarButtonItem alloc] initWithTitle:@"フォルダ追加"
-                                                                     style:UIBarButtonItemStyleBordered
+                                                                     style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(newFolderPressed:)];
 
