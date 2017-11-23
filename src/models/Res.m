@@ -61,7 +61,7 @@
     for (ResNodeBase *node in self.bodyNodes) {
         if (first) {
             if ([node isKindOfClass:[LinkNode class]]) {
-                LinkNode *linkNode = (LinkNode *)node;
+                /* unuse LinkNode *linkNode = (LinkNode *)node;*/
                 /*if ([[linkNode getText] hasPrefix:@"sssp://"]) {
                     continue;
                 }*/

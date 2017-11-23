@@ -58,13 +58,15 @@ static BOOL _userAgentIndexDetermined;
         @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.76 Safari/537.36",
         @"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0"
     ];
+    NSString *ua = @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/604.3.5 (KHTML, like Gecko) Version/11.0.1 Safari/604.3.5 ";
 
     if (_userAgentIndexDetermined == NO) {
         _userAgentIndexDetermined = YES;
         _userAgentIndex = arc4random() % [userAgents count];
     }
 
-    return [userAgents objectAtIndex:_userAgentIndex];
+    return ua;
+    //return [userAgents objectAtIndex:_userAgentIndex];
     // @"Monazilla/1.00 (Forest)";
 }
 

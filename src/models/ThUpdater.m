@@ -272,7 +272,7 @@ static JSContext *_context;
             NSString* mail = [comment objectAtIndex:2];
             NSNumber* dateNum = [comment objectAtIndex:3];
             NSString* idStr = [comment objectAtIndex:4];
-            NSString* beStr = [comment objectAtIndex:5];
+            /* unuse NSString* beStr = [comment objectAtIndex:5];*/
             NSString* bodyText = [comment objectAtIndex:6];
             
             NSString* dateStr = nil;

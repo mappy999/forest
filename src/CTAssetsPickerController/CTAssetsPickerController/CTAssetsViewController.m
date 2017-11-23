@@ -56,7 +56,8 @@ NSString *const CTAssetsSupplementaryViewIdentifier = @"CTAssetsSupplementaryVie
 
 - (id)init
 {
-    UICollectionViewFlowLayout *layout = [self collectionViewFlowLayoutOfOrientation:self.interfaceOrientation];
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    UICollectionViewFlowLayout *layout = [self collectionViewFlowLayoutOfOrientation:orientation];
 
     if (self = [super initWithCollectionViewLayout:layout]) {
         self.collectionView.allowsMultipleSelection = YES;

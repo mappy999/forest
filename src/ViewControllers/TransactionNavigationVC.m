@@ -415,7 +415,9 @@ static const NSInteger kTransactionNavbarTag = 38;
     {
         transaction.progress = progress;
         if (progress == 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
             [transaction.progressView setProgress:progress animated:NO];
+            });
             return;
         }
 

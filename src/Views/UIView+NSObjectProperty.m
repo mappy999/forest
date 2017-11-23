@@ -13,5 +13,10 @@
     objc_setAssociatedObject(self, _cmd, value, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (void)onTabSelected:(UITabBarItem *)tabItem tapTwice:(BOOL)tapTwice
+{
+    if (tapTwice) {
+    }
+}
 
 @end

@@ -59,7 +59,7 @@
         {
             [manager createDirectoryAtPath:pathTheme withIntermediateDirectories:YES attributes:nil error:&error];
         }
-        NSString *pathThemeFile = [pathTheme stringByAppendingPathComponent:[url  lastPathComponent]];
+        //NSString *pathThemeFile = [pathTheme stringByAppendingPathComponent:[url  lastPathComponent]];
         //if ([manager moveItemAtPath:[url path] toPath:pathThemeFile error:&error])
         if ([SSZipArchive unzipFileAtPath:[url path] toDestination:pathTheme])
         {
