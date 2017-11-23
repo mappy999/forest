@@ -268,7 +268,7 @@
 
         ResVm *resVm = [self genResVmWithRes:res];
 
-        BOOL insertedIntoTopLevel = NO;
+        /* unuse BOOL insertedIntoTopLevel = NO; */
 
         id anchorClass = [AnchorNode class];
         BOOL isInserted = NO;

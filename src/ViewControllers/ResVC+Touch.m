@@ -321,6 +321,8 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
     self.currentPopupEntry = popupEntry;
 }
 
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 - (void)popupCenterWithRes:(Res *)res
 {
     ResVmList *resVmList = [[ResVmList alloc] init];
@@ -334,6 +336,7 @@ static NSString *const kResTableViewCellIdentifier = @"ResTableViewCell";
 
     [self popupWithResVmList:resVmList withCell:nil withType:4];
 }
+//#pragma clang diagnostic pop
 
 - (void)popupWithID:(NSString *)idStr withCell:cell highlightRes:(Res *)highlightRes
 {

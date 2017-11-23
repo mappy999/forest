@@ -403,7 +403,7 @@ static UIViewController *_openActionMenuVC;
 
     _openActionMenuVC.isActionMenuOpen = open;
 
-    UIView *superView = _openActionMenuVC.view;
+    /* unuse UIView *superView = _openActionMenuVC.view;*/
     if (open) {
         //_openActionMenuVC = self;
         [self fetch].modalBackground.hidden = NO;

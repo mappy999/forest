@@ -42,6 +42,7 @@ static MainVC *_instance;
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     _instance = self;
 }
 
@@ -447,15 +448,15 @@ static MainVC *_instance;
              } else {
                  if (httpStatusCode != 200) {
                      NSString* errorMsg = [NSString stringWithFormat:@"Error, status code: %@", @(httpStatusCode)];
-                     NSLog(errorMsg);
+                     NSLog(@"%@", errorMsg);
                      return;
                  }
                  
                  NSDictionary *dict = [self extractVersionInfo:data];
                  
                  NSString *nextVersion = dict[@"version"];
-                 NSString *forestZipUrl = dict[@"path"];
-                 NSString *releaseNoteUrl = dict[@"releaseNoteUrl"];
+                 /* unuse NSString *forestZipUrl = dict[@"path"];
+                 NSString *releaseNoteUrl = dict[@"releaseNoteUrl"]; */
                  NSString *checkedVersion = [Env getConfStringForKey:@"checkedVersion" withDefault:nil];
                  if (checkedVersion) {
                      if ([nextVersion isEqualToString:checkedVersion]) {

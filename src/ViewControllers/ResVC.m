@@ -794,7 +794,7 @@ static NSString *const LastCellIdentifier = @"LastCellIdentifier";
 
 - (void)update
 {
-    MyNavigationVC *myNavigationViewController = [MyNavigationVC instance];
+    /* unuse MyNavigationVC *myNavigationViewController = [MyNavigationVC instance];*/
 
     ResTransaction *man = [[ResTransaction alloc] init];
     man.isPushDisabled = YES;
@@ -1118,14 +1118,14 @@ static NSString *const LastCellIdentifier = @"LastCellIdentifier";
         [self.autoScrollCalculator onTouchEnd];
         [self handleTouchEndedEvent:touch];
 
-        AppDelegate *app = [UIApplication sharedApplication].delegate;
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [app.window dismissGestureInfo];
     } break;
 
     case UITouchPhaseCancelled: {
         self.inTouch = NO;
         [self.gesture touchesEnded:pos withEvent:event];
-        AppDelegate *app = [UIApplication sharedApplication].delegate;
+        AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [app.window dismissGestureInfo];
         [self handleTouchCanceledEvent:touch];
 
