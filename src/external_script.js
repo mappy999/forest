@@ -1,10 +1,10 @@
 // htmlをdatに変換する処理
 
 function parse(url, startResNumber, html) {
-    var lines = "", num, mail, date, name, body;
+    var lines = "", num, mail, date, name, uid, body;
 
     var reset = function() {
-        num = mail = name = body = date = "";
+        num = mail = name = body = uid = date = "";
     };
     html = html.replace(/span/g, 'div');
     html = html.replace(/div class="escaped"/g, 'span class="escaped"');
@@ -31,6 +31,8 @@ function parse(url, startResNumber, html) {
                         body = contents + "</span>";
                     } else if (cls == "date") {
                         date= (contents);
+                    } else if (cls == "uid") {
+                        uid= (contents);
                     }
                 } else if (attrName == "data-id") {
                     num = value;
@@ -42,7 +44,7 @@ function parse(url, startResNumber, html) {
     var addLine = function() {
 
         if (name && body && Number(num) >= Number(startResNumber)) {
-            lines += name + "<>" + mail + "<>" + date + "<>" + body + "<>";
+            lines += name + "<>" + mail + "<>" + date + " " + uid + "<>" + body + "<>";
             if (num == 1) {
                 var detectedTitle = null;
                 var t  = html.indexOf("<title>");
